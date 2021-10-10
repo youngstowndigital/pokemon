@@ -1,10 +1,13 @@
 import React from 'react';
+import Card from 'react-bootstrap/Card';
 
 const PokemonCard = ({ pokemon: { name } }) => {
     return (
-        <div>
-            <h1>{ name }</h1>
-        </div>
+        <Card className="m-3">
+            <Card.Body>
+                <Card.Title>{ name }</Card.Title>
+            </Card.Body>
+        </Card>
     )
 };
 
