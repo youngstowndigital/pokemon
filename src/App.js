@@ -1,27 +1,26 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import Endpoints from './endpoints';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+import { loadPokemon } from './actions/pokemonActions';
+import PokemonCard from './components/pokemon/PokemonCard';
 
-const endpoints = new Endpoints();
-
-const App = () => {
-    const [pokemon, setPokemon] = useState([]);
-
+const App = ({ pokemon, loadPokemon }) => {
     useEffect(() => {
-        async function fetchPokemon() {
-            let pokemon = await axios.get(endpoints.getPokemon());
-            setPokemon(pokemon);
-        }
-
-        fetchPokemon();
+        loadPokemon();
     }, []);
 
     return (
         <div>
             <h1>Pokemon App</h1>
-            { JSON.stringify(pokemon) }
+            {
+                pokemon.map(
+                    (pokemon, i) => <PokemonCard key={i} pokemon={pokemon} />)
+            }
         </div>
     );
 };
 
-export default App;
+const mapStateToProps = state => ({
+    pokemon: state.pokemon.pokemon
+});
+
+export default connect(mapStateToProps, { loadPokemon })(App);
