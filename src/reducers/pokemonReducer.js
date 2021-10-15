@@ -12,7 +12,7 @@ const pokemonReducer = (state = initialState, action) => {
 
     switch(type) {
         case LOAD_POKEMON:
-            return { ...state, pokemon: payload.pokemon, prev: payload.prev, next: payload.next };
+            return { ...state, pokemon: payload.pokemon, prev: payload.previous, next: payload.next };
         case SELECT_POKEMON:
             return { ...state, selectedPokemon: payload }
         case DESELECT_POKEMON:

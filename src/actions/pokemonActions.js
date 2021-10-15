@@ -4,13 +4,13 @@ import { LOAD_POKEMON, SELECT_POKEMON, DESELECT_POKEMON } from './actionTypes';
 
 const endpoints = new Endpoints();
 
-export const loadPokemon = () => async (dispatch) => {
+export const loadPokemon = (url = endpoints.getPokemon()) => async (dispatch) => {
     try {
-        const response = await axios.get(endpoints.getPokemon());
+        const response = await axios.get(url);
 
-        const { data: { results, next, prev } } = response;
+        const { data: { results, next, previous } } = response;
 
-        dispatch({ payload: { pokemon: results, next, prev }, type: LOAD_POKEMON })
+        dispatch({ payload: { pokemon: results, next, previous }, type: LOAD_POKEMON })
     } catch (error) {
         console.error(error.message);
     }

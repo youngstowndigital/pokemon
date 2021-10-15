@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { loadPokemon, selectPokemon } from './actions/pokemonActions';
+import { loadPokemon } from './actions/pokemonActions';
 import PokemonList from './components/pokemon/PokemonList';
 import PokemonInfo from './components/pokemon/PokemonInfo';
 
-const App = ({ pokemon, selectedPokemon, loadPokemon }) => {
+const App = ({ selectedPokemon, loadPokemon }) => {
     useEffect(() => {
         loadPokemon();
     }, []);
@@ -16,14 +16,13 @@ const App = ({ pokemon, selectedPokemon, loadPokemon }) => {
                 selectedPokemon ?
                 <PokemonInfo selectedPokemon={selectedPokemon} />
                 :
-                <PokemonList pokemon={pokemon} />
+                <PokemonList />
             }
         </div>
     );
 };
 
 const mapStateToProps = state => ({
-    pokemon: state.pokemon.pokemon,
     selectedPokemon: state.pokemon.selectedPokemon
 });
 
